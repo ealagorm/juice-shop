@@ -36,6 +36,6 @@ jobs:
         serverUrl: ${{ secrets.nexusiq_url }}
         username: ${{ secrets.nexusiq_username }}
         password: ${{ secrets.nexusiq_password }}
-        applicationId: WebGoat__ealagorm
+        applicationId: juice-shop__ealagorm
         stage: Release
         target: .
