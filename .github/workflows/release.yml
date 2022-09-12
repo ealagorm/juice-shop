@@ -1,14 +1,12 @@
 name: Node CI with Nexus IQ
 
-
-
 on: 
   push: 
     branches: 
      - master 
 
 jobs:
-  build:
+  stage:
 
     runs-on: ubuntu-latest
 
@@ -30,7 +28,25 @@ jobs:
         pwd
         ls -a 
     
-    - name: Nexus IQ Policy Evaluation
+    - name: Nexus IQ Policy Evaluation - Stage-Release
+      uses: sonatype-nexus-community/iq-github-action@1.1.0
+      with:
+        serverUrl: ${{ secrets.nexusiq_url }}
+        username: ${{ secrets.nexusiq_username }}
+        password: ${{ secrets.nexusiq_password }}
+        applicationId: juice-shop__ealagorm
+        stage: Stage-Release
+        target: .
+
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    
+    - name: Nexus IQ Policy Evaluation - Release
       uses: sonatype-nexus-community/iq-github-action@1.1.0
       with:
         serverUrl: ${{ secrets.nexusiq_url }}
